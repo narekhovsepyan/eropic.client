@@ -1,0 +1,6 @@
+.c-material-open-box {
+  @include transition(transform 300ms linear);
+  @include transform(scale(0));
+  position: absolute;
+  border-radius: 50%;
+}

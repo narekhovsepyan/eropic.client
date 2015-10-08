@@ -1,0 +1,79 @@
+<script>
+    (function (window, document, token, release, options) {
+        var scriptAttached = false;
+        var loaded = false;
+        var TARGET_HOST = "//stackcare.com/consumer/b.js";
+
+        options = options || {};
+
+        window.stackcare = (function () {
+            function report(exception) {
+                var data = doCollectDataOnError();
+
+                window.stackcare.a.push({
+                    e: exception,
+                    d: data,
+                    l: loaded,
+                    dt: new Date(),
+                    vp: {
+                        w: window.innerWidth,
+                        h: window.innerHeight
+                    }
+                });
+            }
+
+            return {
+                token: token,
+                release: release,
+                views: 0,
+                a: [],
+                report: report,
+                delay: options.delay
+            }
+        }());
+
+        var oldOnErrorCallback = window.onerror;
+
+        window.onerror = function () {
+            attachScript();
+
+            var a = arguments;
+
+            window.stackcare.report(a);
+            oldOnErrorCallback && oldOnErrorCallback.apply(this, a)
+        };
+
+        window.addEventListener ? window.addEventListener("load", onLoad, !1) : window.attachEvent("onload", onLoad);
+
+        function attachScript() {
+            if (!scriptAttached) {
+                scriptAttached = true;
+
+                var elementName = "script";
+                var target = document.getElementsByTagName(elementName)[0];
+                var script = document.createElement(elementName);
+
+                script.src = TARGET_HOST;
+                script.async = true;
+                target.parentNode.insertBefore(script, target)
+            }
+        }
+
+        function doCollectDataOnError() {
+            if (options.dataOnError) {
+                try {
+                    return options.dataOnError();
+                } catch (e) {
+                }
+            }
+
+            return null;
+        }
+
+        function onLoad() {
+            loaded = true;
+        }
+    })(window, document, "ero-pic.prod", "1.0", {
+        delay: 300
+    });
+</script>

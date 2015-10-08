@@ -1,0 +1,29 @@
+$c-gal-color-thumb-background: rgba(0, 0, 0, 0.3);
+
+@mixin c-gal-action($display: block) {
+  display: none;
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+
+  .is-actions & {
+    display: $display;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .is-actions-active & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@mixin c-gal-actions-active {
+  .is-actions-active & {
+    @content;
+  }
+}
+
+@mixin c-gal-hide-on-voting {
+  .is-voting & {
+    display: none;
+  }
+}

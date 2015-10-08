@@ -1,0 +1,348 @@
+$m-album-full-mobile-max-width: 740px;
+$m-album-full-btn-dimension: 44px; //$p*8 + $p-half;
+
+@mixin m-ablum-full--display-on-voting {
+  @include anim-show-on-class("voting");
+}
+
+@import "index.full.vote";
+
+.m-album-full {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+
+  background: $color-black-light;
+}
+
+.m-album-full-mobile {
+  @include hide-larger-than($m-album-full-mobile-max-width, true);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .m-album-full-mobile--favourites {
+    $m-album-full--favourites-dimension: $p*13 + $p-half;
+
+    @extend %c-btn-circle-with-shadow;
+    @include c-gal-action;
+
+    position: absolute;
+    bottom: $p*4;
+    left: $p*4;
+    z-index: $z-5;
+
+    background: $color-blue;
+    width: $m-album-full--favourites-dimension;
+
+    .fa {
+      font-size: 38px;
+      line-height: $m-album-full--favourites-dimension;
+      color: white;
+    }
+  }
+
+  .m-album-full-mobile--close {
+    @extend %m-album-full-mobile--close;
+    @include c-gal-hide-on-voting;
+
+    display: block;
+  }
+}
+
+.m-album-full-mobile-meta {
+  @include c-gal-action;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-4;
+
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  padding: $p*5 $p;
+
+  color: white;
+  text-align: center;
+  text-shadow: 1px 0 0 rgba(0, 0, 0, 0.5);
+
+  .m-album-full-mobile-meta--title {
+    max-height: 2em;
+    overflow: hidden;
+    margin-bottom: $p*5;
+  }
+
+  .m-album-full-mobile-meta--external-link {
+    @include album-external-link;
+
+    font-size: 13px;
+  }
+}
+
+%m-album-full-actions--btn-round {
+  @include border-radius(999px);
+}
+
+%m-album-full-actions--btn-circle {
+  border-radius: 999px;
+  min-width: $m-album-full-btn-dimension;
+  height: $m-album-full-btn-dimension;
+  line-height: $m-album-full-btn-dimension - 1px;
+  text-align: center;
+
+  .fa {
+    line-height: inherit;
+  }
+}
+
+.m-album-full-actions {
+  @include clearfix;
+  @include c-gal-action;
+  @include font-main;
+  @include hide-less-than($m-album-full-mobile-max-width);
+
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: $c-gal-color-thumb-background;
+  padding: $p*3 $padding;
+
+  line-height: $m-album-full-btn-dimension;
+
+  button, a.is-circle {
+    @extend %m-album-full-actions--btn-circle;
+    @extend %c-btn;
+    @include font-main;
+
+    float: left;
+    color: white;
+    //padding: 0 8px;
+    font-weight: bold;
+    background: $color-album-btn;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.3);
+
+    @include is-no-touch-hover {
+      background-color: $color-album-btn-active;
+
+      &.is-active {
+        background-color: $color-pink;
+      }
+    }
+
+    .fa {
+      font-size: 20px;
+    }
+  }
+
+  .m-album-full-actions--left {
+    margin-right: 420px;
+  }
+
+  .m-album-full-actions--right {
+    float: right;
+  }
+
+  .m-album-full-actions--favourites {
+    display: none;
+    background: $color-blue;
+    
+    .fa {
+      font-size: 23px;
+    }
+  }
+
+  .m-album-full-actions--title {
+    margin: 0 $p*6 0 90px;
+
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .m-album-full-actions--full-screen {
+    margin-left: $p*6;
+  }
+
+  .m-album-full-actions--autoplay {
+    margin-right: $p*4;
+    background: white;
+
+    @include is-no-touch-hover {
+      background: $color-pink;
+    }
+
+    .fa {
+      color: black;
+      font-size: 23px;
+      padding-left: 4px;
+    }
+  }
+
+  .m-album-full-actions--external-link {
+    @include album-external-link;
+
+    float: left;
+    margin-right: $p*6;
+
+    > .fa {
+      line-height: $m-album-full-btn-dimension;
+      vertical-align: bottom;
+      padding-right: 3px;
+    }
+
+    > span {
+      font-size: 13px;
+
+      max-width: 70px;
+      overflow: hidden;
+    }
+  }
+
+  .m-album-full-actions--prev-album {
+    margin-right: $p*3;
+
+    background-image: url(/img/icon/album.backward.png);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .m-album-full-actions--next-album {
+    background-image: url(/img/icon/album.forward.png);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.m-album-full-actions-close {
+  position: relative;
+  width: 140px;
+  background: lighten($color-grey-dark, 10%);
+  margin-left: $p*6;
+  line-height: normal;
+
+  > img {
+    position: absolute;
+    left: 16px;
+    height: 18px;
+    top: 13px;
+  }
+
+  %m-album-full-actions-close-vote {
+    $m-album-full-actions-close-vote-dimension: 34px;
+
+    position: absolute;
+
+    min-width: 0;
+    width: $m-album-full-actions-close-vote-dimension;
+    height: $m-album-full-actions-close-vote-dimension;
+
+    line-height: normal;
+    text-align: center;
+
+    .fa {
+      font-size: 17px;
+    }
+  }
+
+  .m-album-full-actions-close--vote-up {
+    @extend %m-album-full-actions-close-vote;
+
+    right: 52px;
+    top: 5px;
+
+    background: $color-green-positive !important;
+  }
+
+  .m-album-full-actions-close--vote-down {
+    @extend %m-album-full-actions-close-vote;
+
+    right: 6px;
+    top: 5px;
+
+    background: $color-pink-negative !important;
+  }
+}
+
+.c-gal {
+  position: relative;
+  z-index: $z-1;
+}
+
+.c-gal-full {
+  %c-gal-full-btn {
+    @include border-radius(999px);
+
+    position: absolute;
+    z-index: 999;
+    top:50%;
+    background: $color-album-btn;
+    padding: $padding*2;
+    margin-top: -($padding*2 + 1);
+
+    @include c-gal-actions-active {
+      &:disabled {
+        opacity: 0.5;
+        background: $color-album-btn;
+      }
+    }
+  }
+
+  %c-gal-full--prev-next {
+    @include width-and-height($c-gal-full--prev-next-dimension);
+    @extend %c-gal-full-btn;
+
+    padding: 0;
+
+    transition: background .3s ease-in-out;
+    background: transparent;
+
+    &:hover {
+      .fa {
+        color: white;
+      }
+    }
+
+    @include c-gal-actions-active {
+      background: $color-album-btn;
+
+      &:hover {
+        background: $color-album-btn-active;
+      }
+    }
+
+    .fa {
+      line-height: $c-gal-full--prev-next-dimension;
+      font-size: 21px;
+      color: white;
+    }
+  }
+
+  .c-gal-full--prev {
+    @extend %c-gal-full--prev-next;
+
+    left: $padding;
+
+    .fa {
+      padding-right: $p-half;
+    }
+  }
+
+  .c-gal-full--next {
+    @extend %c-gal-full--prev-next;
+
+    right: $padding;
+
+    .fa {
+      padding-left: $p-half;
+    }
+  }
+}

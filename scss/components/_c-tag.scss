@@ -1,0 +1,50 @@
+.c-tag {
+  $c-tag-color-darken: rgba(50, 50, 50, 0.2);
+  $c-tag-icon-width: $p*4;
+
+  @include border-radius($border-radius);
+  @include box-shadow(0 1px 2px 0 rgba(0, 0, 0, 0.2));
+
+  display: inline-block;
+  color: white;
+  font-size: 14px;
+  background: $color-brown;
+  margin-right: $p;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  > .fa {
+    @include height-and-line-height($c-tag-height);
+
+    float: left;
+    width: $c-tag-icon-width;
+    text-align: center;
+    border-right: 1px solid $c-tag-color-darken;
+  }
+
+  > span {
+    @include height-and-line-height($c-tag-height);
+
+    display: inline-block;
+    position: relative;
+    padding-left: $p;
+    padding-right: $p*4;
+
+    > .fa {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: $c-tag-color-darken;
+    }
+  }
+
+  &.is-category {
+    background: $color-category;
+  }
+
+  &.is-filter {
+    background: $color-filter;
+  }
+}

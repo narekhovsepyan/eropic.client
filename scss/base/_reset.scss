@@ -1,0 +1,45 @@
+.plus{
+  float: right;
+  background-image: url(http://localhost/img/icon/foto.png);
+  background-repeat: no-repeat;
+  width: 79px;
+  height: 90px;
+  overflow: hidden;
+  background-position: -14px -110px;
+}
+
+.plus:hover{
+  background-position: -103px -110px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body, input {
+  font-family: 'Karla', sans-serif;
+}
+
+div, ul, li, a, input {
+  @include box-sizing(border-box);
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Karla', sans-serif;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 0;
+}

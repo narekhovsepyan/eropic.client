@@ -1,0 +1,14 @@
+@mixin anim-show-on-class($class, $display: block) {
+  @include transition(all .3s ease-in-out);
+
+  display: none;
+
+  .is-#{$class} & {
+    display: $display;
+    opacity: 0;
+  }
+
+  .is-#{$class}-active & {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,8 @@
+$c-spinner-width: 70px;
+$c-spinner-height: 18px;
+
+@mixin c-spinner-color($color) {
+  .c-spinner > div {
+    background-color: $color;
+  }
+}

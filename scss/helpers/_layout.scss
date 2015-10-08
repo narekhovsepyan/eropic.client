@@ -1,0 +1,9 @@
+@mixin l-container-padding($padding-top: $p*2, $padding-bottom: $p*2) {
+  padding: $padding-top $p*1.5 $padding-bottom $p*1.5;
+}
+
+@mixin is-full-screen {
+  .is-full-screen & {
+    @content;
+  }
+}

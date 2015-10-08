@@ -1,0 +1,25 @@
+<!-- @@master  = /layout/_app.html {"title": "Exception", "page": "full"}-->
+
+<!-- @@block = js-->
+<script src="/js/pages/albums/_albumFullScreen.js"></script>
+<script src="/js/pages/albums/_c-gal.js"></script>
+<script src="/js/pages/albums/_c-gal-pan-zoom.js"></script>
+<script src="/js/pages/albums/api.js"></script>
+
+<script src="/js/pages/albums/index.js"></script>
+<!-- @@close-->
+
+<!-- @@block = css-->
+<link rel="stylesheet" href="/css/scss/pages/albums/index.css"/>
+<!-- @@close-->
+
+<!-- @@block  =  content-->
+<div ng-controller="AlbumsCropController" class="tmp-buttons">
+    <button ng-click="open()">open</button>
+    <button ng-click="close()">close</button>
+</div>
+
+<div class="m-album-full-screen" ng-if="fullScreenModel.album.photos">
+    <c-gal photos="fullScreenModel.album.photos" photo-position="2"/>
+</div>
+<!-- @@close-->

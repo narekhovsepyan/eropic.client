@@ -1,0 +1,8 @@
+@import "helpers/all";
+
+.m-albums-item {
+  .m-albums-item--link {
+    //http://stackoverflow.com/questions/6914822/absolute-positioned-anchor-tag-with-no-text-not-clickable-in-ie
+    @include transparent-gif-background;
+  }
+}

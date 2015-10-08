@@ -1,0 +1,38 @@
+<div class="m-search is-opened" ng-if="isOpened()">
+    <form ng-controller="SearchActiveController" ng-submit="submit()" w-mousetrap="{esc: close}" ng-class="{'is-no-recent': !recent.has}">
+        <div class="m-search-input l-container">
+            <button class="m-search-input--cancel" type="button" ng-click="close()" translate="search.cancel"></button>
+
+            <div class="m-search-input-input" ng-class="{'is-empty': !query}">
+                <i class="fa fa-search"></i>
+                <input type="text" class="mousetrap" placeholder="{{::'search.placeholder' | translate}}" ng-model="query" c-autofocus c-focus-on="search-active:focus" />
+                <button class="m-search-input-input--reset" type="button" ng-click="reset()"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+
+        <div class="m-search-grey l-container">
+            <span class="is-hide-no-recent" translate="search.recent.label"></span>
+            <span>&nbsp;</span>
+
+            <div class="m-search-grey-filters is-not-implemented">
+                <button class="m-search-grey-filters--recent is-active" translate="search.tabs.recent"></button>
+                <button class="m-search-grey-filters--categories">
+                    <i class="fa fa-bookmark"></i><span translate="search.tabs.categories"></span>
+                </button>
+                <button class="m-search-grey-filters--tags">
+                    <i class="pi pi-hash"></i><span translate="search.tabs.tags"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="m-search-content l-container">
+            <ul class="m-search-content-recent is-hide-no-recent">
+                <li ng-repeat="item in recent.items" ng-click="submitQuery(item)">
+                    <i class="fa fa-search"></i>
+                    <span ng-bind="::item"></span>
+                    <span class="m-search-content--plus">+</span>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

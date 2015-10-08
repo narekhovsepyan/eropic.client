@@ -1,0 +1,51 @@
+$c-btn-height: $p*6;
+
+@mixin c-btn-active {
+  @include c-btn-border($color-pink);
+
+  background: $color-pink;
+  color: $color-white;
+
+  .fa {
+    color: $color-white;
+  }
+}
+
+@mixin c-btn-border($color: white) {
+  @include box-shadow(0 0 0 1px $color);
+}
+
+@mixin c-btn-white-with-shadow($display: inline-block, $line-height: $p*9) {
+  @include border-radius($border-radius);
+  @include box-shadow(0 1px 5px -1px black);
+
+  display: $display;
+  background: white;
+  color: $color-blue;
+  text-align: center;
+  line-height: $line-height;
+}
+
+%c-btn {
+  &.is-active {
+    @include c-btn-active;
+  }
+}
+
+%c-btn-transparent {
+  @include height-and-line-height($c-btn-height);
+
+  background: transparent;
+  padding-left: $p;
+  padding-right: $p;
+
+  &.is-grey-border {
+    @include border-radius(4px);
+    border: 1px solid $color-border-grey;
+  }
+}
+
+%c-btn-circle-with-shadow {
+  @include border-radius(999px);
+  @include box-shadow(0 1px 3px 0px black);
+}

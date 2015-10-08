@@ -1,0 +1,117 @@
+.m-album-full-vote {
+  @include m-ablum-full--display-on-voting;
+
+  display: none;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-max;
+
+  text-align: center;
+
+  .m-album-full-vote--close {
+    @extend %m-album-full-mobile--close;
+
+    display: block;
+  }
+}
+
+.m-album-full-vote-result {
+  display: none;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-max + 1;
+
+  text-align: center;
+
+  .is-voted & {
+    display: block;
+  }
+
+  .c-material-open-box {
+    .is-voted-active & {
+        @include transform(scale(2));
+    }
+
+    .is-voted-up & {
+      background: $color-green-positive;
+    }
+
+    .is-voted-down & {
+      background: $color-pink-negative;
+    }
+  }
+
+  .c-va-center-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .fa {
+    @include animation(slideInLeft 0.3s);
+
+    color: white;
+    font-size: 100px;
+  }
+
+  p {
+    @include animation(slideInRight 0.3s);
+
+    margin-top: $p*7;
+    margin-bottom: $p*14;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.m-album-full-vote-do {
+  $m-album-full-vote-do--dimension: $p*13 + $p-half;
+
+  position: relative;
+  z-index: $z-1;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  %m-album-full-vote-do--btn {
+    @extend %c-btn-circle-with-shadow;
+    @include width-and-height($m-album-full-vote-do--dimension);
+
+    @include less-than($ipad-height) {
+      margin: 0 $p*7;
+    }
+
+    margin: 0 $p*10;
+
+    .fa {
+      color: white;
+      font-size: 32px;
+    }
+  }
+
+  p {
+    color: white;
+    font-weight: bold;
+    margin: 0 0 ($p*11 + $p-half);
+  }
+
+  .m-album-full-vote-do--up {
+    @extend %m-album-full-vote-do--btn;
+
+    background: $color-green-positive;
+  }
+
+  .m-album-full-vote-do--down {
+    @extend %m-album-full-vote-do--btn;
+
+    background: $color-pink-negative;
+  }
+}

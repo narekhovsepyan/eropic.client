@@ -1,0 +1,20 @@
+<div class="m-header-search l-container" ng-class="{'is-search-empty': search.isEmpty()}">
+    <div class="m-header-search-empty" ng-click="search.open()">
+        <img class="m-header-search-empty--search" src="/img/icon/search.png"/>
+        <i class="fa fa-angle-right"></i>
+        <span translate="search.empty.title"></span>
+    </div>
+
+    <div class="m-header-search-content" ng-click="search.open()">
+        <ul class="m-header-search-content-input">
+            <li class="c-tag is-{{item.class}}" ng-repeat="item in items" ng-click="remove($event, item)">
+                <i class="{{item.icon}}"></i>
+                <span>{{item.displayItem.title}}<i class="fa fa-times"></i></span>
+            </li>
+
+            <li class="m-header-search-content-input--text">{{q}}</li>
+        </ul>
+
+        <button><i class="fa fa-search"></i></button>
+    </div>
+</div>

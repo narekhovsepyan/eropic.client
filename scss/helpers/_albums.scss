@@ -1,0 +1,32 @@
+$c-gal-full--prev-next-dimension: $p*8 + $p-half;
+
+@mixin album-external-link {
+  color: white;
+
+  > span {
+    padding-bottom: 1px;
+    border-bottom: 1px solid white;
+  }
+}
+
+%m-album-full-mobile--close {
+  $m-album-full--close-dimension: $c-gal-full--prev-next-dimension;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: $z-max + 1;
+
+  padding: $padding;
+
+  > img {
+    @extend %c-btn-circle-with-shadow;
+    @include width-and-height($m-album-full--close-dimension);
+
+    display: block;
+    box-sizing: border-box;
+    padding: 7px;
+
+    background: $color-grey-dark;
+  }
+}

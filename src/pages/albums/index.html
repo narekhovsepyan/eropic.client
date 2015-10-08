@@ -1,0 +1,129 @@
+<!-- @@master  = /layout/_app.html {"title": "Exception", "page": "albums.list"}-->
+
+<!-- @@block = meta-->
+<link c-link-albums="prev" />
+<link c-link-albums="next" />
+<!-- @@close-->
+
+<!-- @@block = js-->
+<script src="/js/_search.js"></script>
+
+<script src="/js/pages/albums/_albumFullScreen.js"></script>
+<script src="/js/pages/albums/_c-gal.js"></script>
+<script src="/js/pages/albums/_c-gal-pan-zoom.js"></script>
+<script src="/js/pages/albums/_gallery.js"></script>
+<script src="/js/pages/albums/_albums.js"></script>
+<script src="/js/pages/albums/_vote.js"></script>
+
+<script src="/js/pages/albums/index.js"></script>
+<!-- @@close-->
+
+<!-- @@block = css-->
+<link rel="stylesheet" href="/css/scss/pages/albums/index.css"/>
+<!-- @@close-->
+
+<!-- @@block  =  header.grey-->
+<div ng-controller="AlbumsFilterController">
+    <div c-is-class="{'-filter-active': filterActiveType, '-gallery-active': getGalleryLayout()}">
+        <div class="m-header-grey l-container">
+            <div class="m-header-grey--table">
+                <i class="fa fa-home m-header-grey--icon"></i>
+                <span class="m-header-grey--label" ng-bind="root.filterLabel"></span>
+
+                <div class="m-header-grey--filters-container">
+                    <div class="m-header-grey-filters">
+                        <button ng-click="setFilterFrom('age')" class="is-age-filter"><i class="fa fa-clock-o"></i><span translate="filter.age.title">Age</span></button>
+                        <button ng-click="setFilterFrom('sort')" class="is-sort-filter"><i class="fa fa-sort"></i><span translate="filter.sort.title">Sort</span></button>
+
+                        <div class="m-header-grey-filters--layout">
+                            <button ng-click="setGalleryLayout('grid')" class="is-grid-gallery"><i class="fa fa-th"></i></button>
+                            <button ng-click="setGalleryLayout('row')" class="is-row-gallery"><i class="fa fa-bars"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <albums-filter></albums-filter>
+    </div>
+</div>
+<!-- @@close-->
+
+<!-- @@block  =  content-->
+<div class="m-albums-loading" search-spinner>
+    <div class="c-spinner">
+        <div class="c-spinner--bounce1"></div>
+        <div class="c-spinner--bounce2"></div>
+        <div class="c-spinner--bounce3"></div>
+    </div>
+</div>
+<div class="js-albums-crop-width"></div>
+<div ng-controller="AlbumsController" class="m-albums" ng-class="{'is-loading-albums': isLoadingAlbums}">
+    <div ng-controller="GalleryCropController"
+         ng-style="{width: gallery.rowWidth}"
+         class="m-albums--crop is-{{gallery.layout}}-albums js-albums-crop"
+         infinite-scroll="loadOneMoreBatch()"
+         infinite-scroll-distance="1"
+         infinite-scroll-disabled="isInfiniteDisabled()">
+        <div class="m-albums--container">
+            <div ng-repeat="album in albums track by (album.id + gallery.layout)">
+                <c-ad-list ng-if="::(isDisplayAd($index))"></c-ad-list>
+
+                <div class="m-albums-item" album-item="::album" album-trigger-on-click="albums:beforeAlbumOpen">
+                    <div class="m-albums-item--content">
+                        <div c-lazy-visible="loadThumbnails(album)">
+                            <div class="m-albums-item-photos">
+                                <a class="m-albums-item-photos-item"
+                                   ng-repeat="thumbnail in album.thumbnails track by $index"
+                                   ng-style="::{width: thumbnail.width, height: thumbnail.height}"
+                                   album-href="{{::album.id}}" album-href-photo="{{::($index + 1)}}">
+                                    <span class="m-albums-item-photos-item--type" ng-bind="::thumbnail.type" ng-show="::(thumbnail.type != 'jpg')"></span>
+                                    <img ng-src="{{::thumbnail.loadUrl}}" src="/img/pixel.png" alt=""/>
+                                </a>
+                            </div>
+                        </div>
+
+                        <a class="m-albums-item--title" album-href="{{::album.id}}" album-href-photo="1">
+                            <h2 ng-bind="::album.title"></h2>
+                        </a>
+
+                        <ul class="m-albums-item-popularity">
+                            <li><i class="fa fa-thumbs-up"></i><span ng-bind="::album.votesUp"></span></li>
+                            <li><i class="fa fa-thumbs-down"></i><span ng-bind="::album.votesDown"></span></li>
+                            <li class="m-albums-item-popularity--views"><i class="fa fa-eye"></i><span ng-bind="::album.views"></span></li>
+                            <li class="m-albums-item-popularity--photos-count"><i class="fa fa-th-large"></i><span ng-bind="::album.photos.length"></span></li>
+                        </ul>
+
+
+                        <a class="m-albums-item--external-link" ng-href="{{::album.sourceUrl}}" target="_blank">
+                            <i class="fa fa-external-link"></i><span ng-bind="::album.blogName"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <a rel="nofollow" class="m-albums--load-more-albums" ng-show="hasMoreItems()" ng-click="resetAlbumsAndLoadOneMoreBatch($event)" v-href="{set: {page: pageNext}}" v-href-watch>
+        <span translate="albums.loadMore"></span>
+    </a>
+</div>
+
+
+<script type="text/ng-template" id="/pages/albums/_filter.html">
+    <!-- @@include=/pages/albums/_filter.html -->
+</script>
+
+<script type="text/ng-template" id="/pages/albums/_gal.html">
+    <!-- @@include=/pages/albums/_gal.html -->
+</script>
+
+<script type="text/ng-template" id="/pages/albums/_albumFull.html">
+    <!-- @@include=/pages/albums/_albumFull.html -->
+</script>
+
+<div ng-if="fullScreenModel.album.photos">
+    <c-album-full></c-album-full>
+</div>
+<!-- @@close-->

@@ -1,0 +1,40 @@
+apply plugin: "rpm"
+
+group = "com.devadmin.pix"
+version = hasProperty("rpmVersion") ? get("rpmVersion") : "0.1"
+
+project.ext {
+    applicationName = "pix-client"
+}
+
+buildscript {
+    apply from: "https://gradleconfig.devadmin.com/devadmin.build.1.gradle"
+
+    dependencies {
+        classpath "com.netflix.nebula:gradle-ospackage-plugin:2.2.6"
+    }
+}
+
+task npmInstall(type: Exec) {
+    workingDir "./"
+    commandLine "npm", "install"
+}
+
+task buildProd(type: Exec, dependsOn: ":npmInstall") {
+    workingDir "./"
+    commandLine "gulp", "build.prod", "--minify"
+}
+
+task rpm(type: Rpm, dependsOn: ":buildProd") {
+    packageName = project.ext.applicationName
+    version = project.version
+    release = 1
+    arch = NOARCH
+    os = LINUX
+
+    into "/"
+
+    from("./build/static/") {
+        into "/srv/eropic/client/build/static"
+    }
+}

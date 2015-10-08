@@ -1,0 +1,9 @@
+<div class="m-header-grey-filters-select l-container" ng-class="{'is-displayed': isDisplayed, 'is-changing': isChanging}">
+    <div class="m-header-grey-filters-select--content">
+        <ul ng-repeat="(filterType, filterItems) in ::filters" class="m-header-grey-filters-select-list is-{{::filterType}}" ng-class="{'is-active': isFilterActive(filterType)}" ng-click="close()">
+            <li ng-repeat="item in ::filterItems" class="m-header-grey-filters-select-list--item js-filter-item" data-filter-type="{{::filterType}}" data-filter-item-key="{{::item.key}}" ng-style="::{width: item.width}">
+                <a rel="nofollow" ng-bind="::item.title"></a>
+            </li>
+        </ul>
+    </div>
+</div>

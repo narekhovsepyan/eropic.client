@@ -1,0 +1,79 @@
+<div class="m-album-full" c-anim-class="{'is-actions': isActionsDisplayed && !vote.isVoting, 'is-voting': vote.isVoting, 'is-voted': vote.isVoted()}">
+    <div class="m-album-full-actions" c-album-full-do-not-hide-on-idle>
+        <div class="m-album-full-actions--right">
+            <a class="m-album-full-actions--external-link" ng-href="{{::fullScreenModel.album.sourceUrl}}" target="_blank">
+                <i class="fa fa-external-link"></i><span ng-bind="::fullScreenModel.album.blogName"></span>
+            </a>
+            <button ng-click="albumOpenPrev()" ng-show="hasPrevAlbum" class="m-album-full-actions--prev-album"></button>
+            <button ng-click="albumOpenNext()" ng-show="hasNextAlbum" class="m-album-full-actions--next-album"></button>
+            <button ng-click="fullScreen.toggle()" class="m-album-full-actions--full-screen" ng-class="{'is-active': fullScreen.isEnabled()}" ng-show="fullScreen.supports">
+                <i class="fa fa-arrows-alt"></i>
+            </button>
+            <a rel="nofollow" v-href="{href: albumsUrl}" class="m-album-full-actions-close is-circle">
+                <img src="/img/icon/close.png" alt="Close"/>
+                <button class="m-album-full-actions-close--vote-up" c-vote-button="vote.up" c-vote-button-shake="0">
+                    <i class="fa fa-thumbs-up"></i>
+                </button>
+                <button class="m-album-full-actions-close--vote-down" c-vote-button="vote.down" c-vote-button-shake="0">
+                    <i class="fa fa-thumbs-down"></i>
+                </button>
+            </a>
+        </div>
+        <div class="m-album-full-actions--left">
+            <button ng-click="autoplay.toggle()" class="m-album-full-actions--autoplay" ng-class="{'is-active': autoplay.enabled}">
+                <i class="fa fa-play"></i>
+            </button>
+            <button class="m-album-full-actions--favourites is-not-implemented"><i class="fa fa-star"></i></button>
+            <h1 class="m-album-full-actions--title" ng-bind="fullScreenModel.album.title"></h1>
+        </div>
+    </div>
+
+    <div class="m-album-full-mobile">
+        <button class="m-album-full-mobile--favourites is-not-implemented"><i class="fa fa-star"></i></button>
+        <button class="m-album-full-mobile--close" ng-click="close()">
+            <img src="/img/icon/close.png" title="Close">
+        </button>
+
+        <div class="m-album-full-mobile-meta">
+            <h1 class="m-album-full-mobile-meta--title" ng-bind="::fullScreenModel.album.title"></h1>
+
+            <a class="m-album-full-mobile-meta--external-link" ng-href="{{::fullScreenModel.album.sourceUrl}}" target="_blank">
+                <i class="fa fa-external-link"></i><span>杉原杏璃が</span>
+            </a>
+        </div>
+    </div>
+
+    <div ng-class="{'is-voted-up': vote.isVotedUp, 'is-voted-down': vote.isVotedDown}">
+        <div class="m-album-full-vote-result">
+            <div c-material-open-box="{show: vote.isVoted(), left: 30}"></div>
+            <div class="c-va-center-container">
+                <div class="c-va-center-item">
+                    <i class="fa" ng-class="{'fa-thumbs-up': vote.isVotedUp, 'fa-thumbs-down': vote.isVotedDown}"></i>
+                    <p translate="album.vote.thanks"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-album-full-vote">
+            <button class="m-album-full-vote--close" ng-click="close()">
+                <img src="/img/icon/close.png" title="Close">
+            </button>
+
+            <div class="m-album-full-vote-do">
+                <div class="c-va-center-container">
+                    <div class="c-va-center-item">
+                        <p translate="album.vote.message"></p>
+                        <button class="m-album-full-vote-do--up" c-vote-button="vote.up">
+                            <i class="fa fa-thumbs-up"></i>
+                        </button>
+                        <button class="m-album-full-vote-do--down" c-vote-button="vote.down">
+                            <i class="fa fa-thumbs-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <c-gal photos="fullScreenModel.album.photos" photo-position="fullScreenModel.photoPosition" photo-opened="onPhotoOpened" photo-click="toggleActions()" photo-preload-count="1"/>
+</div>

@@ -1,0 +1,40 @@
+@mixin m-search-content-row {
+  $padding-top-bottom: $p*2 + 1px;
+
+  position: relative;
+  display: block;
+
+  margin-bottom: 1px;
+  padding: $padding-top-bottom $p*6 $padding-top-bottom ($p*6 + $p-half);
+
+  font-size: 14px;
+  color: white;
+}
+
+.m-search-content {
+  @include padding-top-bottom($l-container-padding);
+
+  .m-search-content--plus {
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    font-size: 29px;
+
+    color: darken($color-blue-light, 20%);
+  }
+}
+
+.m-search-content-recent {
+  > li {
+    @include m-search-content-row;
+
+    background: $color-blue-light;
+    cursor: pointer;
+
+    .fa-search {
+      position: absolute;
+      top: 10px;
+      left: 11px;
+    }
+  }
+}

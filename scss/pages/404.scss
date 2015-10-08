@@ -1,0 +1,90 @@
+@import "./helpers/all";
+
+html, body {
+  height: 100%;
+}
+
+.pushy-body {
+  height: 100%;
+
+  .l-header {
+    @include m-header-shadow;
+  }
+
+  .l-content {
+    height: 100%;
+  }
+}
+
+.m-4xx {
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: $header-first-row-height $p*6 0 $p*6;
+  text-align: center;
+
+  color: white;
+  background: $color-pink;
+  @include background-image(linear-gradient(to bottom, $color-pink, $color-blue-light));
+}
+
+.m-4xx-body {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+
+  .m-4xx--logo {
+    margin: $p*7 0;
+    width: $p*13;
+    height: $p*13;
+  }
+
+  h1 {
+    font-size: 16px;
+    line-height: 3;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.4;
+    margin-bottom: $p*15;
+  }
+}
+
+.m-4xx-footer {
+  display: table-row;
+
+  a {
+    @include c-btn-white-with-shadow();
+
+    width: 100%;
+    max-width: $p*60;
+    margin: $p*6 0;
+  }
+}
+
+@include larger-than($ipad-width) {
+  .pushy-body {
+    height: 100%;
+
+    .l-content {
+      display: table;
+      width: 100%;
+    }
+  }
+
+  .m-4xx {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .m-4xx-body {
+    display: block;
+    height: initial;
+  }
+
+  .m-4xx-footer {
+    display: block;
+  }
+}

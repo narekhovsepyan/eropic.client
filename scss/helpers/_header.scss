@@ -1,0 +1,42 @@
+$header-first-row-height: 50px;
+$header-btn-grey-inactive: darken($color-grey-dark, 8%);
+$header-btn-grey-active: #A3A3A3;
+$header-btn-short-width: $p*7 + $p-half;
+$header-grey-padding-top-bottom: $p + $p-half;
+
+%header-btn-grey-transparent {
+  border: 1px solid $color-border-black;
+  margin-right: $p;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+@mixin m-header-shadow {
+  @include box-shadow(0 0 8px -1px black);
+}
+
+@mixin m-header-nav-row($padding: $p*2) {
+  @include padding-top-bottom($padding);
+}
+
+@mixin m-header-grey {
+  @include m-header-nav-row($header-grey-padding-top-bottom);
+
+  background: $color-grey-dark;
+  color: $color-text-grey;
+}
+
+@mixin m-header-btn-active {
+  background: $header-btn-grey-active;
+  color: white;
+
+  .fa {
+    color: white;
+  }
+}
+
+%m-header-btn-active {
+  @include m-header-btn-active;
+}

@@ -1,0 +1,48 @@
+.c-notification {
+  $c-notification-button-width: $p*17;
+  $c-notification-button-gap: $p*3 + $p-half;
+
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-max + 1;
+
+  opacity: 0;
+  color: white;
+  background: #ee2b63;
+  min-height: $p*12 + $p-half;
+  transition: opacity .3s ease-in-out;
+
+  &.is-displayed {
+    display: block;
+  }
+
+  &.is-displayed-active {
+    opacity: 1;
+  }
+
+  > span {
+    display: block;
+    padding: $p*5 ($c-notification-button-width + $c-notification-button-gap*2) $p*4 $p*5;
+
+    > a {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+
+  > button {
+    position: absolute;
+    top: $p*3;
+    right: $c-notification-button-gap;
+    height: $p*6 + $p-half;
+    width: $c-notification-button-width;
+    padding: 0 $p;
+
+    color: white;
+    border: 1px solid $color-pink-dark-border;
+    font-size: 16px;
+  }
+}

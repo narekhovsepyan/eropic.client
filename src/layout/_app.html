@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" class="is-env-<!-- @echo environment -->" ng-app="app" ng-controller="RootController">
+<head>
+    <meta charset="utf-8">
+    <title>ero-pic.net</title>
+    <base href="/">
+    <meta name="fragment" content="!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!-- @@placeholder =meta -->
+
+    <!-- JS exception tracker -->
+    <!-- @@include=_js.track.<!-- @echo environment -->.html -->
+
+    <!--CSS-->
+    <!-- @@include=_css.html -->
+
+    <!-- build:css /css/pages/<!-- @@var page -->.css-->
+    <!-- @@placeholder =css -->
+    <!-- endbuild -->
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/css/scss/ie9.css"/>
+    <![endif]-->
+
+    <!--JS-->
+    <!-- @@include=_js.html -->
+
+    <!-- build:js /js/compiled/pages/<!-- @@var page -->.js-->
+    <!-- @@placeholder =js -->
+    <!-- endbuild -->
+
+    <!--GA-->
+    <!-- @@include=_ga.<!-- @echo environment -->.html -->
+</head>
+<body class="{{::pageClass}} is-{{::platform}}">
+
+<!-- Pushy Menu -->
+<nav class="pushy-nav pushy-left">
+    <!-- @@include=_pushy.html -->
+</nav>
+
+<!-- Site Overlay -->
+<div class="pushy-cloak"></div>
+
+<!-- Your Content -->
+<div class="pushy-body">
+    <!-- @@include=_header.html -->
+
+    <div class="l-content" ng-style="{'margin-top': contentMarginTop}">
+        <!-- @@placeholder =content -->
+    </div>
+</div>
+
+<search-active></search-active>
+<c-notification></c-notification>
+
+<script type="text/ng-template" id="/common/_search.input.html">
+    <!-- @@include=/common/_search.input.html -->
+</script>
+<script type="text/ng-template" id="/common/_search.active.html">
+    <!-- @@include=/common/_search.active.html -->
+</script>
+</body>
+</html>

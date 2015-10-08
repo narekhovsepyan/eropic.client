@@ -1,0 +1,190 @@
+.m-header-grey {
+  position: relative;
+  z-index: $z-2;
+
+  .m-header-grey--table {
+    display: table;
+    width: 100%;
+  }
+
+  .m-header-grey--icon {
+    @include table-cell-vertical-alight;
+
+    width: 30px;
+
+    font-size: 21px;
+    margin-right: $p*2;
+  }
+
+  .m-header-grey--label {
+    @include table-cell-vertical-alight;
+
+    padding-top: 1px;
+
+    @include less-than(400px) {
+      max-width: 150px;
+    }
+  }
+
+  .m-header-grey--filters-container {
+    @include table-cell-vertical-alight;
+  }
+}
+
+@mixin m-header-grey-filters-btn {
+  @include text-shadow(0 1px 1px #292929);
+
+  padding: $p ($l-container-padding);
+  min-width: $p*7;
+  font-size: 14px;
+}
+
+.m-header-grey-filters {
+  float: right;
+
+  > button {
+    @mixin m-header-btn-active($type) {
+      &.is-#{$type}-filter {
+        .is-#{$type}-filter-active & {
+          @extend %m-header-btn-active;
+        }
+      }
+    }
+
+    @include m-header-grey-filters-btn;
+    @include m-header-btn-active("age");
+    @include m-header-btn-active("sort");
+    @extend %header-btn-grey-transparent;
+
+    float: left;
+
+    &:hover {
+      background: $header-btn-grey-inactive;
+    }
+
+    > span {
+      @include hide-less-than($responsive-width-iphone-plus + 50px);
+
+      padding-left: $p;
+    }
+  }
+
+  .m-header-grey-filters--layout {
+    float: left;
+    border: 1px solid $color-border-black;
+    margin-left: $p*2;
+
+    @include less-than(768px) {
+      display: none;
+    }
+
+    > button {
+      @mixin m-header-btn-active($type) {
+        &.is-#{$type}-gallery {
+          .is-#{$type}-gallery-active & {
+            @extend %m-header-btn-active;
+          }
+        }
+      }
+
+      @include m-header-grey-filters-btn;
+      @include m-header-btn-active("grid");
+      @include m-header-btn-active("row");
+
+      background: $header-btn-grey-inactive;
+      float: left;
+
+      &:hover {
+        background: $color-grey-dark;
+      }
+    }
+  }
+}
+
+.m-header-grey-filters-select {
+  @include transition(transform .3s ease-in-out);
+  @include transform(translateY(-100%));
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: $z-1;
+
+  background: $color-grey-dark;
+  color: $color-text-grey;
+  font-size: 14px;
+  padding: $header-grey-padding-top-bottom $l-container-padding;
+
+  &.is-displayed {
+    @include transform(translateY(0%));
+    position: relative;
+  }
+
+  @include less-than($responsive-width-iphone-plus) {
+    font-size: 12px;
+  }
+
+  .m-header-grey-filters-select--content {
+    height: 32px;
+    position: relative;
+
+    @include less-than(360px) {
+      height: 60px;
+    }
+  }
+}
+
+.m-header-grey-filters-select-list {
+  @include transition(opacity .4s ease-in-out);
+  @include clearfix;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-1;
+  visibility: hidden;
+
+  border: 1px solid $color-black-light;
+  opacity: 1;
+
+  .is-changing & {
+    opacity: 0;
+  }
+
+  &.is-active {
+    z-index: $z-2;
+    visibility: visible;
+  }
+
+  .m-header-grey-filters-select-list--item {
+    float: left;
+    height: 100%;
+
+    background: $color-grey-medium;
+    border-right: 1px solid darken($color-grey-medium, 20%);
+    line-height: $p*6;
+    text-align: center;
+    cursor: pointer;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &.is-active {
+      background: $color-pink;
+
+      > a {
+        color: white;
+      }
+    }
+
+    > a {
+      display: block;
+      height: 100%;
+      color: $color-text-grey;
+    }
+  }
+}

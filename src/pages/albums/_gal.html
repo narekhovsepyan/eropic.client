@@ -1,0 +1,50 @@
+<div class="c-gal is-displayed">
+    <div class="c-gal-full js-c-gal-full">
+        <button class="c-gal-full--prev" ng-click="full.goToPrev()" ng-if="full.prevActive" c-album-full-do-not-hide-on-idle>
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="c-gal-full--next" ng-click="full.goToNext()" ng-if="full.nextActive" c-album-full-do-not-hide-on-idle>
+            <i class="fa fa-chevron-right"></i>
+        </button>
+
+        <div ng-repeat="rr in renderer"> <!--we need it to rerender .js-gal-full-->
+            <ul class="js-gal-full">
+                <li class="c-gal-full-slide" ng-repeat="photo in photos" c-gal-click="photoClick(photo)">
+                    <div class="c-va-center-container">
+                        <div class="c-va-center-item">
+                            <img ng-src="{{::photo.full}}" alt="" class="c-gal-full-slide--img"
+                                 ng-class="{'is-fit-width': photo.fit == 'width', 'is-fit-height': photo.fit == 'height'}"
+                                 ng-style="{'max-height': photo.maxHeight}"
+                                 c-gal-pan-zoom c-gal-slide="$index" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="c-gal--thumb-wrapper" ng-if="thumbs.isDisplayed">
+        <div class="c-gal-thumb" c-album-full-do-not-hide-on-idle>
+            <button class="c-gal-thumb-prev" ng-show="!isFullScreen" ng-click="thumbs.goToPrev()" ng-disabled="!thumbs.prevActive">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+
+            <button class="c-gal-thumb-next" ng-show="!isFullScreen" ng-click="thumbs.goToNext()" ng-disabled="!thumbs.nextActive">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+
+            <div class="c-gal-thumb-slides">
+                <div ng-repeat="rr in renderer"> <!--we need it to rerender .js-gal-thumb-->
+                    <div class="js-gal-thumb">
+                        <div ng-repeat="photo in photos" class="c-gal-thumb-slides-item"
+                             ng-style="{width: photo.thumb.width}"
+                             ng-class="{'is-active': photoActive == photo}"
+                             c-gal-click="openPhoto(photo)">
+                            <span class="c-gal-thumb-slides-item--type" ng-show="::(photo.type != 'jpg')" ng-bind="::photo.type"></span>
+                            <img ng-src="{{::photo.thumb.loadUrl}}" alt="" c-lazy-visible="loadThumbnail(photo)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

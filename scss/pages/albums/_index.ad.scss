@@ -1,0 +1,17 @@
+.m-ad {
+  @include flexbox;
+  @include justify-content(space-around);
+  @include align-items(center);
+
+  padding-top: $m-albums-item-padding;
+
+  .is-grid-albums & {
+    float: left;
+    width: 100%;
+  }
+
+  .m-ad--item {
+    vertical-align: middle;
+    overflow: hidden;
+  }
+}

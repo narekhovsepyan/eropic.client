@@ -1,0 +1,12 @@
+.headroom {
+  @include transition(transform 200ms linear);
+}
+.headroom.is-no-animation {
+  @include transition(none);
+}
+.headroom--pinned {
+  @include transform(translateY(0%));
+}
+.headroom--unpinned {
+  @include transform(translateY(-100%));
+}

@@ -1,0 +1,77 @@
+@mixin height-and-line-height($height) {
+  height: $height;
+  line-height: $height;
+}
+
+@mixin min-height-and-line-height($height) {
+  min-height: $height;
+  line-height: $height;
+}
+
+@mixin width-and-height($dimension) {
+  width: $dimension;
+  height: $dimension;
+}
+
+@mixin padding-top-bottom($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin inline-margin-right($margin: 0) {
+  //https://css-tricks.com/fighting-the-space-between-inline-block-elements/
+  margin-right: ($margin - 4px);
+}
+
+@mixin table-cell-vertical-alight($va: middle) {
+  display: table-cell;
+  vertical-align: $va;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+@mixin hide-in-production {
+  .is-env-prod & {
+    visibility: hidden !important;
+  }
+}
+
+@mixin display-none-in-production {
+  .is-env-prod & {
+    display: none !important;
+  }
+}
+
+@mixin is-touch {
+  .touch & {
+    @content;
+  }
+}
+
+@mixin is-no-touch {
+  .no-touch & {
+    @content;
+  }
+}
+
+@mixin is-no-touch-hover {
+  .no-touch & {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin isolate-paint-rectangle {
+  -webkit-transform: translate3d(0,0,0);
+}
+
+@mixin transparent-gif-background {
+  //http://stackoverflow.com/questions/6914822/absolute-positioned-anchor-tag-with-no-text-not-clickable-in-ie
+  background-image: url('data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICR‌​AEAOw==')
+}

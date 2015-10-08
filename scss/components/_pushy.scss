@@ -1,0 +1,115 @@
+$m-pushy-color-background-black: rgba(0, 0, 0, 0.3);
+$m-pushy--padding-left: $p*4 + $p-half;
+$m-pushy-langs--margin-top-bottom: $p*7;
+
+%m-pushy-row {
+  position: relative;
+
+  line-height: $p*10 + $p-half;
+  border-bottom: 1px solid #b0b2af;
+  padding-left: $p*8;
+  padding-right: $p*4;
+
+  &.is-active {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      left: -$m-pushy--padding-left;
+      width: $p;
+      background: white;
+    }
+  }
+
+  .fa-angle-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -5px;
+  }
+}
+
+.pushy-body {
+  border-top: 1px solid transparent; //prevent margin-top
+  margin-top: -1px;
+}
+
+.pushy-nav {
+  //box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .7);
+  background-color: #8e928e;
+}
+
+.m-pushy {
+  @include display-none-in-production;
+  @include flexbox;
+  @include flex-direction(column);
+  @include background-size(cover);
+
+  background: url(/img/sidemenu.bg.jpg) no-repeat center center fixed;
+  border: 1px solid transparent;
+  height: 100%;
+  padding-left: $m-pushy--padding-left;
+  padding-right: $p*6;
+
+  color: white;
+  font-weight: bold;
+
+  a {
+    color: white;
+  }
+
+  .m-pushy--spacer {
+    @include flex-grow(1);
+  }
+}
+
+.m-pushy-input {
+  @include border-radius($border-radius);
+
+  margin-top: $p*3;
+  line-height: $p*7 + $p-half;
+  background: $m-pushy-color-background-black;
+}
+
+.m-pushy-pages {
+  margin-top: $p*6;
+
+  > li {
+    @extend %m-pushy-row;
+  }
+}
+
+.m-pushy-best {
+  $m-pushy-best--margin-top-bottom: $p*14;
+
+  margin: $m-pushy-best--margin-top-bottom 0 ($m-pushy-best--margin-top-bottom - $m-pushy-langs--margin-top-bottom) 0;
+
+  > li {
+    @extend %m-pushy-row;
+  }
+}
+
+.m-pushy-langs {
+  @include border-radius($border-radius);
+  @include clearfix;
+
+  margin: $m-pushy-langs--margin-top-bottom;
+  line-height: $p*7 + $p-half;
+  background: $m-pushy-color-background-black;
+
+  > li {
+    @include border-radius($border-radius);
+
+    float: left;
+    width: 33%;
+
+    &:last-child {
+      width: 34%;
+    }
+
+    &.is-active {
+      background: white;
+    }
+  }
+}

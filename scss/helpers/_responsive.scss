@@ -1,0 +1,145 @@
+$pad-max-width: 1024px;
+$responsive-with-parent: '&'; //add parent selector if calling tree has parent selector
+$responsive-without-parent: ''; //don't add parent selector if calling tree doesn't have parent selector. Otherwise SASS will throw and error
+
+$responsive-width-iphone-plus: 414px;
+
+$ipad-width: 768px;
+$ipad-height: 1024px;
+
+//we need to separate mobile and pc content and don't display mobile content for pc users
+//originally we used max-device-width directing but it has problems with android original browser - VS-1945
+//so now we use mix of max-with and filter mobile content by html.is-mobile condition
+@mixin _mobile($parent-rule, $max, $min: false) {
+  @if ($min) {
+    @media all and (#{$media-min-width}: $min) and (#{$media-max-width}: $max) {
+      @content;
+    }
+  } @else {
+    @media all and (#{$media-max-width}: $max) {
+      @content;
+    }
+  }
+}
+
+@mixin mobile-and-pad($parent-rule: $responsive-with-parent) {
+  @include _mobile($parent-rule, $pad-max-width) {
+    @content;
+  }
+}
+
+@mixin mobile($parent-rule: $responsive-with-parent) {
+  @include _mobile($parent-rule, 480px) {
+    @content;
+  }
+}
+
+@mixin iphone-portrait($parent-rule: $responsive-with-parent) {
+  @include _mobile($parent-rule, 320px) {
+    @content;
+  }
+}
+
+@mixin pad($parent-rule: $responsive-with-parent) {
+  @include _mobile($parent-rule, $pad-max-width, 481px) {
+    @content;
+  }
+}
+
+@mixin pc($parent-rule: $responsive-with-parent) {
+  html.is-desktop #{$parent-rule} {
+    @media all and (#{$media-min-width}: $pad-max-width + 1) {
+      @content;
+    }
+  }
+}
+
+@mixin pc-on-class-only() {
+  html.is-desktop & {
+    @content;
+  }
+}
+
+@mixin mobile-and-pad-on-class-only($parent-rule: $responsive-with-parent) {
+  html.is-mobile #{$parent-rule} {
+    @content;
+  }
+}
+
+@mixin less-than($width, $parent-rule: $responsive-with-parent) {
+  @if ($width <= $pad-max-width) {
+    @include _mobile($parent-rule, $width) {
+      @content;
+    }
+  } @else {
+    @media all and (#{$media-max-width}: $width) {
+      @content;
+    }
+  }
+}
+
+@mixin larger-than($width, $parent-rule: $responsive-with-parent) {
+  @media all and (#{$media-min-width}: $width + 1) {
+    @content;
+  }
+}
+
+@mixin columns-3 {
+  @include less-than($pad-max-width) {
+    @content;
+  }
+}
+
+@mixin columns-2 {
+  @include less-than(640px) {
+    @content;
+  }
+}
+
+@mixin column-1 {
+  @include less-than(319px) {
+    @content;
+  }
+}
+
+@mixin display-pc-only {
+  @include mobile-and-pad-on-class-only {
+    display: none;
+  }
+}
+
+%display-pc-only {
+  @include display-pc-only;
+}
+
+@mixin display-mobile-and-pad-only {
+  @include pc-on-class-only {
+    display: none;
+  }
+}
+
+%display-mobile-and-pad-only {
+  @include display-mobile-and-pad-only;
+}
+
+@mixin display-less-than($width, $display: block) {
+  @include less-than($width) {
+    display: $display !important;
+  }
+}
+
+@mixin hide-less-than($width) {
+  @include less-than($width) {
+    display: none !important;
+  }
+}
+
+@mixin hide-larger-than($width, $important: false) {
+  @include larger-than($width) {
+    @if $important {
+      display: none !important;
+    } @else {
+      display: none;
+    }
+  }
+}

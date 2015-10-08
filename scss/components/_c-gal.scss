@@ -1,0 +1,152 @@
+$c-gal-thumb-padding: $padding;
+$c-gal-thumb-full-height: $c-gal-thumb-height + 2*$c-gal-thumb-padding;
+$c-gal-color-bg: $color-black-light;
+$c-gal-color-thumb-nav: $color-grey-dark;
+$c-gal-color-thumb-nav-active: $color-album-btn-active;
+$c-gal-color-thumb-nav-text: #BFBFBF;
+$c-gal-color-padding: #333C4E;
+
+.c-gal {
+  display: none;
+  //position: fixed;
+  //top: 0;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
+  height: 100%;
+  background: $c-gal-color-bg;
+
+  &.is-displayed {
+    display: block;
+  }
+
+  .js-gal-full {
+    width: 100%;
+    height: 100%;
+  }
+
+  .c-gal--thumb-wrapper {
+    @include c-gal-action;
+
+    padding: $c-gal-thumb-padding;
+    margin-top: -$c-gal-thumb-full-height;
+
+    z-index: 999;
+    position: relative;
+    background: $c-gal-color-thumb-background;
+  }
+}
+
+.c-gal-full {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+
+  margin-bottom: -20px;
+
+  div {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.c-gal-full-slide {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .c-gal-full-slide--img {
+    display: block;
+
+    &.is-fit-width {
+      width: 100%;
+      height: auto;
+      max-height: 100%; //fix bug with chrome scaling
+    }
+
+    &.is-fit-height {
+      height: 100%;
+      margin: auto;
+    }
+  }
+}
+
+.c-gal-thumb {
+  height: $c-gal-thumb-height;
+}
+
+.c-gal-thumb-slides {
+  margin: 0 30px;
+}
+
+.c-gal-thumb-slides-item {
+  height: $c-gal-thumb-height;
+  overflow: hidden;
+  cursor: pointer;
+
+  position: relative;
+
+  &.is-active {
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+
+      background: $color-pink-dark;
+    }
+  }
+
+  > img {
+    height: 100%;
+  }
+
+  .c-gal-thumb-slides-item--type {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    font-size: 10px;
+    font-weight: normal;
+    color: white;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.7);
+    border-radius: 4px;
+    padding: 3px 6px;
+  }
+}
+
+%c-gal-thumb-prev-next {
+  @include flexbox;
+  @include align-items(center);
+
+  width: $p*5 + $p-half;
+  height: 100%;
+  background: $c-gal-color-thumb-nav;
+
+  &:hover {
+    background: $c-gal-color-thumb-nav-active;
+
+    .fa {
+      color: white;
+    }
+  }
+
+  .fa {
+    margin: auto;
+    color: $c-gal-color-thumb-nav-text;
+  }
+}
+
+.c-gal-thumb-prev {
+  @extend %c-gal-thumb-prev-next;
+
+  float: left;
+}
+
+.c-gal-thumb-next {
+  @extend %c-gal-thumb-prev-next;
+
+  float: right;
+}

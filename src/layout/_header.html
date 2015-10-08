@@ -1,0 +1,18 @@
+<header class="l-header" ng-controller="HeaderController">
+    <div class="m-header-nav l-container js-header-row" ng-mouseover="showOnMouseOver()">
+        <button class="m-header-nav--open c-btn-transparent is-grey-border is-not-implemented" ng-click="pushy.open()">
+            <i class="fa fa-bars"></i>
+            <span>Menu</span>
+        </button>
+        <a href="/" class="m-header-nav--logo">
+            <img src="/img/logo.png" title="ero-pic.net">
+        </a>
+    </div>
+    <div class="m-header--hide-on-scroll js-header-row js-header-headroom" headroom offset="100">
+        <div>
+            <search></search>
+        </div>
+
+        <!-- @@placeholder =header.grey -->
+    </div>
+</header>
